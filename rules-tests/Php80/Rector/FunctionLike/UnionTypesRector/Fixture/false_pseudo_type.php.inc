@@ -14,17 +14,3 @@ class FalsePseudoType
 }
 
 ?>
------
-<?php
-
-namespace Rector\Tests\Php80\Rector\FunctionLike\UnionTypesRector\Fixture;
-
-class FalsePseudoType
-{
-    public function go($value): false|int
-    {
-        return (int) $value ?? false;
-    }
-}
-
-?>
