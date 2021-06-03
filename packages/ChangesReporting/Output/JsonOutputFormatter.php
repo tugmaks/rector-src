@@ -8,6 +8,7 @@ use Nette\Utils\Json;
 use Rector\ChangesReporting\Annotation\RectorsChangelogResolver;
 use Rector\ChangesReporting\Contract\Output\OutputFormatterInterface;
 use Rector\Core\Configuration\Configuration;
+use Rector\Core\Contract\Rector\RectorInterface;
 use Rector\Core\ValueObject\ProcessResult;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
@@ -70,6 +71,22 @@ final class JsonOutputFormatter implements OutputFormatterInterface
         }
 
         $json = Json::encode($errorsArray, Json::PRETTY);
+
+        $outputFile = $this->configuration->getOutputFile();
+        if ($outputFile !== null) {
+            $this->smartFileSystem->dumpFile($outputFile, $json . PHP_EOL);
+        } else {
+            echo $json . PHP_EOL;
+        }
+    }
+
+    public function show(array $rectors): void
+    {
+        $rectorsArray = array_map(function (RectorInterface $rector) {
+            return get_class($rector);
+        }, $rectors);
+
+        $json = Json::encode($rectorsArray, Json::PRETTY);
 
         $outputFile = $this->configuration->getOutputFile();
         if ($outputFile !== null) {

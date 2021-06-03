@@ -10,6 +10,7 @@ use Rector\ChangesReporting\Contract\Output\OutputFormatterInterface;
 use Rector\Core\Configuration\Configuration;
 use Rector\Core\Configuration\Option;
 use Rector\Core\Contract\Console\OutputStyleInterface;
+use Rector\Core\Contract\Rector\RectorInterface;
 use Rector\Core\ValueObject\Application\RectorError;
 use Rector\Core\ValueObject\ProcessResult;
 use Rector\Core\ValueObject\Reporting\FileDiff;
@@ -64,6 +65,20 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
     public function getName(): string
     {
         return self::NAME;
+    }
+
+
+    public function show(array $rectors): void
+    {
+        $rectorCount = count($rectors);
+        $this->outputStyle->title('Loaded Rector rules');
+
+        foreach ($rectors as $rector) {
+            $this->outputStyle->writeln(' * ' . get_class($rector));
+        }
+
+        $message = sprintf('%d loaded Rectors', $rectorCount);
+        $this->outputStyle->success($message);
     }
 
     /**
