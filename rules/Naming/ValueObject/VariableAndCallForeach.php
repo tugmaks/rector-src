@@ -17,6 +17,7 @@ use PhpParser\Node\Stmt\Function_;
 final class VariableAndCallForeach
 {
     /**
+     * @param FuncCall|StaticCall|MethodCall $expr
      * @param ClassMethod|Function_|Closure $functionLike
      */
     public function __construct(
