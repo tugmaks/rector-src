@@ -21,6 +21,7 @@ use Rector\Privatization\Rector\Property\PrivatizeLocalPropertyToPrivateProperty
 use Rector\Restoration\Rector\ClassMethod\InferParamFromClassMethodReturnRector;
 use Rector\Restoration\ValueObject\InferParamFromClassMethodReturn;
 use Rector\Set\ValueObject\SetList;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 use Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
@@ -99,6 +100,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ReturnTypeDeclarationRector::class => [
             __DIR__ . '/packages/PHPStanStaticTypeMapper/TypeMapper/ArrayTypeMapper.php',
             __DIR__ . '/packages/PHPStanStaticTypeMapper/TypeMapper/ObjectTypeMapper.php',
+            __DIR__ . '/src/DependencyInjection/Loader/ConfigurableCallValuesCollectingPhpFileLoader.php',
+        ],
+
+        AddVoidReturnTypeWhereNoReturnRector::class => [
             __DIR__ . '/src/DependencyInjection/Loader/ConfigurableCallValuesCollectingPhpFileLoader.php',
         ],
 
