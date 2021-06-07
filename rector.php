@@ -9,7 +9,6 @@ use Rector\CodingStyle\ValueObject\PreferenceSelfThis;
 use Rector\Core\Configuration\Option;
 use Rector\Core\Rector\AbstractRector;
 use Rector\DeadCode\Rector\Stmt\RemoveUnreachableStatementRector;
-use Rector\Naming\Rector\Class_\RenamePropertyToMatchTypeRector;
 use Rector\Nette\Set\NetteSetList;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
@@ -100,7 +99,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ReturnTypeDeclarationRector::class, // PhpVersionFeature::STATIC_RETURN_TYPE
         UnionTypesRector::class,
         ParamTypeDeclarationRector::class,
-        RenamePropertyToMatchTypeRector::class,
 
         RemoveUnreachableStatementRector::class => [
             __DIR__ . '/rules/Php70/Rector/FuncCall/MultiDirnameRector.php',
