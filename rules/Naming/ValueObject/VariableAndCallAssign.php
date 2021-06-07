@@ -18,12 +18,11 @@ use PhpParser\Node\Stmt\Function_;
 final class VariableAndCallAssign
 {
     /**
-     * @param FuncCall|StaticCall|MethodCall $call
      * @param ClassMethod|Function_|Closure $functionLike
      */
     public function __construct(
         private Variable $variable,
-        private Expr $call,
+        private Expr $expr,
         private Assign $assign,
         private string $variableName,
         private FunctionLike $functionLike
@@ -40,7 +39,7 @@ final class VariableAndCallAssign
      */
     public function getCall(): Expr
     {
-        return $this->call;
+        return $this->expr;
     }
 
     public function getVariableName(): string
